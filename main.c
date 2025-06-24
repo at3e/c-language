@@ -1,7 +1,10 @@
 #include<stdio.h>
+#include "bmp.h"
 
 int main() {
-    printf("Hello World!\n");
+    image o_file;
+
+    // initialize header
     o_file.file_header.header.signature[0] = 'B';
     o_file.file_header.header.signature[1] = 'M';
     o_file.file_header.header.file_size = sizeof(o_file);
@@ -34,6 +37,9 @@ int main() {
         printf("Error: could not create file.\n");
         return 1;
     }
+
+    fwrite(&o_file, sizeof(o_file), 1, file);
+    fclose(file);
 
     return 0;
 }
